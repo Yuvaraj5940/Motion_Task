@@ -2,6 +2,7 @@ import {
   View,
   TouchableOpacity,
   FlatList,
+  Text,
   Image,
   StyleSheet,
   Dimensions,
@@ -51,16 +52,17 @@ const List = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TextInput
-          style={styles.inputContainer}
-          placeholder="Search Movie"
-          onChangeText={text => setSearch(text)}
-        />
+        <Text style={styles.title}>List of Images</Text>
         <TouchableOpacity
           onPress={() => setLayout(val => (val === 3 ? 1 : val + 1))}>
           <Image source={iconList[layout - 1].icon} style={styles.button} />
         </TouchableOpacity>
       </View>
+      <TextInput
+          style={styles.inputContainer}
+          placeholder="Search Movie"
+          onChangeText={text => setSearch(text)}
+      />
       <View style={styles.imageContainer}>
         <FlatList
           onEndReached={() => fetchData()}
@@ -101,6 +103,12 @@ const styles = StyleSheet.create({
     height: dimension / 10,
     width: dimension / 10,
   },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    flex: 1,
+    color: 'black',
+  },
   imageContainer: {
     alignSelf: 'center',
   },
@@ -112,9 +120,11 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   inputContainer: {
-    flex: 1,
-    borderWidth: 2,
-    borderRadius: dimension / 20,
+    height: 40,
+    borderWidth: 1,
+    width: dimension * 0.9,
+    alignSelf: 'center',
+    borderRadius: dimension / 30,
     paddingLeft: dimension / 20,
   },
 });
