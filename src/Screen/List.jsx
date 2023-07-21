@@ -1,6 +1,6 @@
 import {
   View,
-  Text,
+  TouchableOpacity,
   FlatList,
   Image,
   StyleSheet,
@@ -45,9 +45,9 @@ const List = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Pressable onPress={() => setLayout(val => (val === 3 ? 1 : val + 1))}>
+        <TouchableOpacity onPress={() => setLayout(val => (val === 3 ? 1 : val + 1))}>
           <Image source={require('../assets/menu.png')} style={styles.button} />
-        </Pressable>
+        </TouchableOpacity>
         <TextInput
           style={styles.inputContainer}
           placeholder="Search Movie"
