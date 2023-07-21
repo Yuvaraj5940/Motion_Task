@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
     left: 20,
   },
   icon: {
-    width: 30,
-    height: 30,
+    width: 20,
+    height: 20,
   },
 });
 export default ImagePage;
