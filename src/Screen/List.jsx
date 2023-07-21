@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     height: 40,
     borderWidth: 1,
+    borderColor:'gray',
     width: dimension * 0.9,
     alignSelf: 'center',
     borderRadius: dimension / 30,
