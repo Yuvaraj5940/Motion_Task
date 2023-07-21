@@ -17,7 +17,7 @@ const List = ({navigation}) => {
   const [movieList, setMovieList] = useState([]);
   const [layout, setLayout] = useState(1);
   const [search, setSearch] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const iconList = [
     {icon: require('../assets/menu.png')},
@@ -59,9 +59,9 @@ const List = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <TextInput
-          style={styles.inputContainer}
-          placeholder="Search Movie"
-          onChangeText={text => setSearch(text)}
+        style={styles.inputContainer}
+        placeholder="Search Movie"
+        onChangeText={text => setSearch(text)}
       />
       <View style={styles.imageContainer}>
         <FlatList
@@ -69,6 +69,7 @@ const List = ({navigation}) => {
           numColumns={layout}
           data={movieList}
           key={layout}
+          style={{flex: 1}}
           keyExtractor={(item, index) => index}
           renderItem={({item}) => {
             if (item.title.includes(search)) {
@@ -79,9 +80,10 @@ const List = ({navigation}) => {
                       uri: `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_w.jpg`,
                     }}
                     style={{
-                      width: dimension * (1 / layout).toFixed(1),
-                      height: dimension * (1 / layout).toFixed(1),
-                      margin: 3,
+                      width: Dimensions.get('window').width / layout,
+                      height: Dimensions.get('window').width / layout,
+                      borderWidth: 2,
+                      borderColor: '#ffff',
                     }}
                   />
                 </Pressable>
