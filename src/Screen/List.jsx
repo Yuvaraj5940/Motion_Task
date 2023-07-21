@@ -58,11 +58,13 @@ const List = ({navigation}) => {
           <Image source={iconList[layout - 1].icon} style={styles.button} />
         </TouchableOpacity>
       </View>
-      <TextInput
-        style={styles.inputContainer}
-        placeholder="Search Movie"
-        onChangeText={text => setSearch(text)}
-      />
+      <View style={styles.TextContain}>
+        <TextInput
+          style={styles.inputContainer}
+          placeholder="Search Movie"
+          onChangeText={text => setSearch(text)}
+        />
+      </View>
       <View style={styles.imageContainer}>
         <FlatList
           onEndReached={() => fetchData()}
@@ -102,14 +104,15 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   button: {
-    height: dimension / 12,
-    width: dimension / 12,
+    height: 20,
+    width: 20,
+    tintColor: '#808080',
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     flex: 1,
-    color: 'black',
+    color: '#404040',
   },
   imageContainer: {
     alignSelf: 'center',
@@ -119,17 +122,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     gap: 10,
-    padding: 10,
+    paddingTop: 10,
+    paddingHorizontal: 20,
   },
   inputContainer: {
     height: 40,
     borderWidth: 1,
-    borderColor:'gray',
-    width: dimension * 0.9,
+    borderColor: 'gray',
+    width: '100%',
     alignSelf: 'center',
-    borderRadius: dimension / 30,
-    paddingLeft: dimension / 20,
+    borderRadius: 10,
+    paddingLeft: 10,
   },
+  TextContain: {paddingHorizontal: 20},
 });
 
 export default List;
