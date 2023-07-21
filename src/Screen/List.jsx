@@ -45,7 +45,8 @@ const List = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => setLayout(val => (val === 3 ? 1 : val + 1))}>
+        <TouchableOpacity
+          onPress={() => setLayout(val => (val === 3 ? 1 : val + 1))}>
           <Image source={require('../assets/menu.png')} style={styles.button} />
         </TouchableOpacity>
         <TextInput
@@ -68,10 +69,11 @@ const List = ({navigation}) => {
                   source={{
                     uri: `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_w.jpg`,
                   }}
-                  style={[
-                    styles.image,
-                    {width: dimension * (1 / layout).toFixed(1)},
-                  ]}
+                  style={{
+                    width: dimension * (1 / layout).toFixed(1),
+                    height: dimension * (1 / layout).toFixed(1),
+                    margin: 5,
+                  }}
                 />
               </Pressable>
             );
@@ -86,11 +88,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     gap: 10,
-    padding: dimension / 30,
-  },
-  image: {
-    height: 200,
-    margin: 5,
   },
   button: {
     height: dimension / 10,
@@ -111,6 +108,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     gap: 10,
+    padding: 10,
   },
   inputContainer: {
     flex: 1,
