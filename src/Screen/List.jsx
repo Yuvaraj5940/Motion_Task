@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import {
   View,
   Text,
@@ -15,7 +14,7 @@ const dimension = Dimensions.get('window').width;
 
 const List = ({navigation}) => {
   const [movieList, setMovieList] = useState([]);
-  const [layout, setLayout] = useState(false);
+  const [layout, setLayout] = useState(1);
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -46,7 +45,7 @@ const List = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Pressable onPress={() => setLayout(!layout)}>
+        <Pressable onPress={() => setLayout(val => (val === 3 ? 1 : val + 1))}>
           <Image source={require('../assets/menu.png')} style={styles.button} />
         </Pressable>
         <TextInput
@@ -57,8 +56,9 @@ const List = ({navigation}) => {
       </View>
       <FlatList
         onEndReached={() => fetchData()}
-        numColumns={0}
+        numColumns={layout}
         data={movieList}
+        key={layout}
         keyExtractor={(item, index) => index}
         renderItem={({item}) => {
           if (item.title.includes(search)) {
@@ -70,7 +70,7 @@ const List = ({navigation}) => {
                   }}
                   style={[
                     styles.image,
-                    {width: true ? dimension * 0.45 : '100%'},
+                    {width: dimension * (1 / layout).toFixed(1)},
                   ]}
                 />
               </Pressable>
@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 200,
-    width: '100%',
     margin: 5,
   },
   button: {
