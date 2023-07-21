@@ -102,8 +102,8 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   button: {
-    height: dimension / 10,
-    width: dimension / 10,
+    height: dimension / 12,
+    width: dimension / 12,
   },
   title: {
     fontSize: 24,
