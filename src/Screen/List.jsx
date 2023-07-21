@@ -11,8 +11,6 @@ import {
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 
-const dimension = Dimensions.get('window').width;
-
 const List = ({navigation}) => {
   const [movieList, setMovieList] = useState([]);
   const [layout, setLayout] = useState(1);
