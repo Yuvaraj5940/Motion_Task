@@ -18,6 +18,12 @@ const List = ({navigation}) => {
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
+  const iconList = [
+    {icon: require('../assets/menu.png')},
+    {icon: require('../assets/grid.png')},
+    {icon: require('../assets/list.png')},
+  ];
+
   const fetchData = async () => {
     try {
       let nextPage = currentPage + 1;
@@ -45,41 +51,43 @@ const List = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity
-          onPress={() => setLayout(val => (val === 3 ? 1 : val + 1))}>
-          <Image source={require('../assets/menu.png')} style={styles.button} />
-        </TouchableOpacity>
         <TextInput
           style={styles.inputContainer}
           placeholder="Search Movie"
           onChangeText={text => setSearch(text)}
         />
+        <TouchableOpacity
+          onPress={() => setLayout(val => (val === 3 ? 1 : val + 1))}>
+          <Image source={iconList[layout - 1].icon} style={styles.button} />
+        </TouchableOpacity>
       </View>
-      <FlatList
-        onEndReached={() => fetchData()}
-        numColumns={layout}
-        data={movieList}
-        key={layout}
-        keyExtractor={(item, index) => index}
-        renderItem={({item}) => {
-          if (item.title.includes(search)) {
-            return (
-              <Pressable onPress={() => loadImg(item)}>
-                <Image
-                  source={{
-                    uri: `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_w.jpg`,
-                  }}
-                  style={{
-                    width: dimension * (1 / layout).toFixed(1),
-                    height: dimension * (1 / layout).toFixed(1),
-                    margin: 5,
-                  }}
-                />
-              </Pressable>
-            );
-          }
-        }}
-      />
+      <View style={styles.imageContainer}>
+        <FlatList
+          onEndReached={() => fetchData()}
+          numColumns={layout}
+          data={movieList}
+          key={layout}
+          keyExtractor={(item, index) => index}
+          renderItem={({item}) => {
+            if (item.title.includes(search)) {
+              return (
+                <Pressable onPress={() => loadImg(item)}>
+                  <Image
+                    source={{
+                      uri: `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_w.jpg`,
+                    }}
+                    style={{
+                      width: dimension * (1 / layout).toFixed(1),
+                      height: dimension * (1 / layout).toFixed(1),
+                      margin: 3,
+                    }}
+                  />
+                </Pressable>
+              );
+            }
+          }}
+        />
+      </View>
     </View>
   );
 };
@@ -94,14 +102,7 @@ const styles = StyleSheet.create({
     width: dimension / 10,
   },
   imageContainer: {
-    marginBottom: dimension / 30,
-  },
-  pagination: {
-    height: 40,
-    width: 50,
-    borderRightWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignSelf: 'center',
   },
   headerContainer: {
     flexDirection: 'row',
